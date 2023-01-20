@@ -13,8 +13,8 @@ const App = () => {
       <main className='py-2'>
         <Container>
           <Routes>
-            <Route path='/' element={<HomeScreen />} />
-            <Route path='/product/:id' element={<ProductScreen />} />
+            <Route exact path='/' element={<HomeScreen />} />
+            <Route exact path='/product/:id' component={<ProductScreen />} />
           </Routes>
         </Container>
       </main>

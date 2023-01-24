@@ -1,0 +1,29 @@
+{
+  "name": "backend-commercify",
+  "version": "1.0.0",
+  "description": "server for commercify",
+  "main": "server.js",
+  "scripts": {
+    "watch": "nodemon",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/breakfireaus/commercify.git"
+  },
+  "keywords": [
+    "'"
+  ],
+  "author": "Matthew Younger-Chudnovsky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/breakfireaus/commercify/issues"
+  },
+  "homepage": "https://github.com/breakfireaus/commercify#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

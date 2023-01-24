@@ -11,16 +11,13 @@ const ProductScreen = ({ match }) => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      // const { data } = await axios.get(`api/products/${encodeURIComponent(id)}`)
-      const url = `localhost:5000/api/product/${encodeURIComponent(id)}`
-      console.log(url)
-      const data = await fetch(url)
+      const { data } = await axios.get(`/api/product/${encodeURIComponent(id)}`)
 
       setProduct(data)
     }
 
     fetchProduct()
-  }, [id])
+  }, [])
 
   return (
     <>

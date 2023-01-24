@@ -1,11 +1,26 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
-import products from '../products'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const ProductScreen = ({ match }) => {
-  const product = products.find((p) => p._id === match.params.id)
+  const [product, setProduct] = useState({})
+  const { id } = useParams()
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      // const { data } = await axios.get(`api/products/${encodeURIComponent(id)}`)
+      const url = `localhost:5000/api/product/${encodeURIComponent(id)}`
+      console.log(url)
+      const data = await fetch(url)
+
+      setProduct(data)
+    }
+
+    fetchProduct()
+  }, [id])
 
   return (
     <>
@@ -17,19 +32,23 @@ const ProductScreen = ({ match }) => {
           <Image src={product.image} alt={product.name} fluid />
         </Col>
         <Col md={3}>
-          <ListGroup variant='flush'>
-            <ListGroup.Item>
-              <h2>{product.name}</h2>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Rating
-                value={product.rating}
-                text={`${product.numReviews} reviews`}
-              />
-            </ListGroup.Item>
-            <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-            <ListGroup.Item>Description: {product.description}</ListGroup.Item>
-          </ListGroup>
+          <Card>
+            <ListGroup variant='flush'>
+              <ListGroup.Item>
+                <h2>{product.name}</h2>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Rating
+                  value={product.rating}
+                  text={`${product.numReviews} reviews`}
+                />
+              </ListGroup.Item>
+              <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+              <ListGroup.Item>
+                Description: {product.description}
+              </ListGroup.Item>
+            </ListGroup>
+          </Card>
         </Col>
         <Col md={3}>
           <Card>

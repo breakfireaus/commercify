@@ -12,7 +12,8 @@ app.get('/api/products', (req, res) => {
 })
 
 app.get('/api/products/:id', (req, res) => {
-  const product = products.find((p) => p._id === req, params.id)
-  res.json(products)
+  const product = products.find((p) => p._id === req.params.id)
+  res.json(product)
 })
-app.listen(3001, console.log('Server running on port 3001'))
+
+app.listen(3001, console.log('Server running on port 5000'))

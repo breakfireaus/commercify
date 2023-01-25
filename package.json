@@ -1,5 +1,5 @@
 {
-  "name": "commercify",
+  "name": "backend",
   "version": "1.0.0",
   "description": "MERN E commerce website with Shopping cart",
   "main": "server/server.js",
@@ -21,9 +21,6 @@
     "url": "https://github.com/breakfireaus/commercify/issues"
   },
   "homepage": "https://github.com/breakfireaus/commercify#readme",
-  "dependencies": {
-    "concurrently": "^7.6.0"
-  },
   "devDependencies": {
     "concurrently": "^7.6.0"
   }

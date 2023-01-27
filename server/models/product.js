@@ -1,23 +1,23 @@
 import mongoose from 'mongoose'
 
 const reviewSchema = mongoose.Schema(
-    {
-    reviewName: {type: String, required: true},
-    rating: {type: Number, required: true},
-    comment: Name: {type: String, required: true},
-}, 
-{
+  {
+    reviewName: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+  },
+  {
     timestamps: true,
-}
+  }
 )
 
 const userSchema = mongoose.Schema(
   {
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User'
-    }
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
     Name: {
       type: String,
       required: true,
@@ -33,39 +33,43 @@ const userSchema = mongoose.Schema(
     category: {
       type: String,
       required: true,
-    },    
-    description: {
-        type: String,
-        required: true,
-      },    
-    rating: {
-        type: Number,
-        required: true,
-        default: 0
-      },
-      numReviews: {
-        type: Number,
-        required: true,
-        default: 0
-      },
-      reviews:[review]
-      price: {
-        type: Number,
-        required: true,
-        default: 0
-      },
-      countInStock: {
-        type: Number,
-        required: true,
-        default: 0
-      }, 
+    },
 
+    description: {
+      type: String,
+      required: true,
+    },
+
+    rating: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+
+    numReviews: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+
+    reviews: [review],
+
+    price: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    countInStock: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
   },
   {
     timestamps: true,
   }
 )
 
-const Product = mongoose.model('User', userSchema)
+const Product = mongoose.model('Product', productSchema)
 
-export default User
+export default Product

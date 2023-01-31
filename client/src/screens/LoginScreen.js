@@ -14,8 +14,8 @@ const LoginScreen = ({}) => {
   const location = useLocation()
   const dispatch = useDispatch()
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { loading, error, userInfo } = userLogin
+  const usersLogin = useSelector((state) => state.usersLogin)
+  const { loading, error, userInfo } = usersLogin
   const navigate = useNavigate()
   const redirect = location.search ? location.search.split('=')[1] : '/'
 

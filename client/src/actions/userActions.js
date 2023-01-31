@@ -1,18 +1,18 @@
 import axios from 'axios'
 import {
-  USER_LOGIN_FAIL,
-  USER_LOGIN_REQUEST,
-  USER_LOGIN_SUCCESS,
-  USER_LOGOUT,
-  USER_REGISTER_FAIL,
-  USER_REGISTER_REQUEST,
-  USER_REGISTER_SUCCESS,
+  USER_LOGIN_FAILED,
+  USER_LOGIN_REQUESTED,
+  USER_LOGIN_SUCCESSFUL,
+  USER_LOGOUT_OCCURRENCE,
+  USER_REGISTRATION_FAIL,
+  USER_REGISTRATION_REQUEST,
+  USER_REGISTRATION_SUCCESSFUL,
 } from '../constants/userConstants'
 
 export const login = (userEmail, userPassword) => async (dispatch) => {
   try {
     dispatch({
-      type: USER_LOGIN_REQUEST,
+      type: USER_LOGIN_REQUESTED,
     })
 
     const config = {
@@ -27,14 +27,14 @@ export const login = (userEmail, userPassword) => async (dispatch) => {
     )
 
     dispatch({
-      type: USER_LOGIN_SUCCESS,
+      type: USER_LOGIN_SUCCESSFUL,
       payload: data,
     })
 
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
-      type: USER_LOGIN_FAIL,
+      type: USER_LOGIN_FAILED,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -45,14 +45,14 @@ export const login = (userEmail, userPassword) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
-  dispatch({ type: USER_LOGOUT })
+  dispatch({ type: USER_LOGOUT_OCCURRENCE })
 }
 
 export const register =
   (userName, userEmail, userPassword) => async (dispatch) => {
     try {
       dispatch({
-        type: USER_REGISTER_REQUEST,
+        type: USER_REGISTRATION_REQUEST,
       })
 
       const config = {
@@ -67,19 +67,19 @@ export const register =
       )
 
       dispatch({
-        type: USER_REGISTER_SUCCESS,
+        type: USER_REGISTRATION_SUCCESSFUL,
         payload: data,
       })
 
       dispatch({
-        type: USER_LOGIN_SUCCESS,
+        type: USER_LOGIN_SUCCESSFUL,
         payload: data,
       })
 
       localStorage.setItem('userInfo', JSON.stringify(data))
     } catch (error) {
       dispatch({
-        type: USER_REGISTER_FAIL,
+        type: USER_REGISTRATION_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

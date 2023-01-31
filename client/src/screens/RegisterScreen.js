@@ -84,7 +84,7 @@ const RegisterScreen = ({}) => {
             type='Password'
             placeholder='Confirm Password'
             className='color-black'
-            value={userPassword}
+            value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>

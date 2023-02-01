@@ -7,6 +7,9 @@ import {
   USER_REGISTRATION_FAIL,
   USER_REGISTRATION_REQUEST,
   USER_REGISTRATION_SUCCESSFUL,
+  USER_UPDATEDPROFILE_FAILED,
+  USER_UPDATEDPROFILE_REQUESTED,
+  USER_UPDATEDPROFILE_SUCCESSFUL,
 } from '../constants/userConstants'
 
 export const login = (userEmail, userPassword) => async (dispatch) => {
@@ -87,3 +90,36 @@ export const register =
       })
     }
   }
+
+export const getUserDetails = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_UPDATEDPROFILE_REQUESTED,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorisation: `Bearer ${userInfo.token}`,
+      },
+    }
+    const { data } = await axios.get(`/api/users/${id}`, config)
+
+    dispatch({
+      type: USER_UPDATEDPROFILE_SUCCESSFUL,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATEDPROFILE_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}

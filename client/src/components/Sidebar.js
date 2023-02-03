@@ -1,11 +1,9 @@
-import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar'
+import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { logout } from '../actions/userActions'
-import { link } from 'react-router-dom'
-import shoppingimage from '../images/shopping-cart.png'
 
 function Layout() {
   const dispatch = useDispatch()
@@ -17,7 +15,7 @@ function Layout() {
   }
   return (
     <div style={{ display: 'flex', height: '100%' }}>
-      <Sidebar>
+      <Sidebar classname='Vh-100'>
         <Menu>
           <LinkContainer to='/' className='m-1'>
             <Navbar.Brand className='text-black'>

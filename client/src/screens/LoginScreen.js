@@ -55,7 +55,11 @@ const LoginScreen = ({}) => {
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        {error && <Message variant='danger'>{error}</Message>}
+        {error && (
+          <Message className='my-2 ' variant='danger'>
+            {error}
+          </Message>
+        )}
         {loading && <Loader />}
         <Button type='submit' variant='primary' className='mt-3'>
           Sign In

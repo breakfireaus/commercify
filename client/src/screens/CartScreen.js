@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
@@ -7,7 +7,7 @@ import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 
 const CartScreen = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate() ***FUTURE***
   const { id } = useParams()
   const { search } = useLocation()
   const productId = id
@@ -27,13 +27,13 @@ const CartScreen = () => {
     dispatch(removeFromCart(id))
   }
 
-  const checkoutHandler = () => {
-    navigate('/login?redirect=shipping')
-  }
+  // const checkoutHandler = () => {
+  //   navigate('/login?redirect=shipping') ***FUTURE***
+  // }
 
   return (
     <Row>
-      <Col md={8}>
+      <Col md={8} className='mt-2'>
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message>
@@ -45,14 +45,14 @@ const CartScreen = () => {
             {cartItems.map((item) => (
               <ListGroup.Item key={item.product}>
                 <Row>
-                  <Col md={2}>
+                  <Col md={3}>
                     <Image src={item.image} alt={item.name} fluid rounded />
                   </Col>
                   <Col md={3}>
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </Col>
-                  <Col md={2}>${item.price}</Col>
-                  <Col md={2}>
+                  <Col md={3}>${item.price}</Col>
+                  <Col md={3}>
                     <Form.Select
                       as='select'
                       value={item.qty}
@@ -69,13 +69,13 @@ const CartScreen = () => {
                       ))}
                     </Form.Select>
                   </Col>
-                  <Col md={2}>
+                  <Col md={3} className='mt-1'>
                     <Button
                       type='button'
                       variant='light'
                       onClick={() => removeFromCartHandler(item.product)}
                     >
-                      <i className='fas fa-trash'></i>
+                      <i className='fas fa-trash' />
                     </Button>
                   </Col>
                 </Row>
@@ -83,8 +83,7 @@ const CartScreen = () => {
             ))}
           </ListGroup>
         )}
-
-        <Card className='mt-3'>
+        <Card className='mt-2'>
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>
@@ -96,7 +95,7 @@ const CartScreen = () => {
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                 .toFixed(2)}
             </ListGroup.Item>
-            <ListGroup.Item>
+            {/* <ListGroup.Item> ***FUTURE***
               <Button
                 type='button'
                 className='btn-block'
@@ -105,7 +104,7 @@ const CartScreen = () => {
               >
                 Proceed to Checkout
               </Button>
-            </ListGroup.Item>
+            </ListGroup.Item> */}
           </ListGroup>
         </Card>
       </Col>

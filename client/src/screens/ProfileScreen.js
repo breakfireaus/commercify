@@ -17,11 +17,8 @@ const ProfileScreen = ({}) => {
   const location = useLocation()
   const dispatch = useDispatch()
 
-  const userDetails = useSelector((state) => state.userDetails)
-  const { loading, error, user } = userDetails
-
   const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  const { userInfo, loading, error } = userLogin
 
   const navigate = useNavigate()
 
@@ -29,11 +26,11 @@ const ProfileScreen = ({}) => {
     if (!userInfo) {
       navigate('/login')
     } else {
-      if (!user.userName) {
+      if (!userInfo.userName) {
         dispatch(getUserDetails('profile'))
       } else {
-        setName(user.userName)
-        setEmail(user.userEmail)
+        setName(userInfo.userName)
+        setEmail(userInfo.userEmail)
       }
     }
   }, [dispatch, userInfo])
@@ -48,68 +45,62 @@ const ProfileScreen = ({}) => {
   }
 
   return (
-    <FormContainer>
-      <h1>Sign up</h1>
-      {message && <Message variant='danger'>{message}</Message>}
-      {error && <Message variant='danger'>{error}</Message>}
-      {loading && <Loader />}
+    <Row>
+      <Col md={6}>
+        <h1>My Profile</h1>
+        {message && <Message variant='danger'>{message}</Message>}
+        {error && <Message variant='danger'>{error}</Message>}
+        {loading && <Loader />}
 
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId='userName'>
-          <Form.Label>Full Name</Form.Label>
-          <Form.Control
-            type='userName'
-            placeholder='Enter Name'
-            value={userName}
-            onChange={(e) => setName(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+        <Form onSubmit={submitHandler}>
+          <Form.Group controlId='userName'>
+            <Form.Label>Full Name</Form.Label>
+            <Form.Control
+              type='userName'
+              placeholder='Enter Name'
+              value={userName}
+              onChange={(e) => setName(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId='userEmail'>
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Enter Email'
-            value={userEmail}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+          <Form.Group controlId='userEmail'>
+            <Form.Label>Email Address</Form.Label>
+            <Form.Control
+              type='email'
+              placeholder='Enter Email'
+              value={userEmail}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId='Password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='Password'
-            placeholder='Enter Password'
-            value={userPassword}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+          <Form.Group controlId='Password'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type='Password'
+              placeholder='Enter Password'
+              value={userPassword}
+              onChange={(e) => setPassword(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId='confirmPassword'>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type='Password'
-            placeholder='Confirm Password'
-            className='color-black'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
+          <Form.Group controlId='confirmPassword'>
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              type='Password'
+              placeholder='Confirm Password'
+              className='color-black'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+        </Form>
+      </Col>
+      <Col md={6}>
         <Button type='submit' variant='primary' className='mt-3'>
-          Register
+          Update details
         </Button>
-      </Form>
-
-      <Row className='py-3'>
-        <Col>
-          Have an Account?{' '}
-          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
-            Login
-          </Link>
-        </Col>
-      </Row>
-    </FormContainer>
+      </Col>
+    </Row>
   )
 }
 

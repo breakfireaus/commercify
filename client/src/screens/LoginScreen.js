@@ -14,8 +14,8 @@ const LoginScreen = ({}) => {
   const location = useLocation()
   const dispatch = useDispatch()
 
-  const usersLogin = useSelector((state) => state.usersLogin)
-  const { loading, error, userInfo } = usersLogin
+  const userLogin = useSelector((state) => state.userLogin)
+  const { loading, error, userInfo } = userLogin
   const navigate = useNavigate()
   const redirect = location.search ? location.search.split('=')[1] : '/'
 
@@ -34,8 +34,7 @@ const LoginScreen = ({}) => {
   return (
     <FormContainer>
       <h1>Sign In</h1>
-      {error && <Message variant='danger'>{error}</Message>}
-      {loading && <Loader />}
+
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='userEmail'>
           <Form.Label>Email Address</Form.Label>
@@ -47,7 +46,7 @@ const LoginScreen = ({}) => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId='Password'>
+        <Form.Group controlId='userPassword'>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='Password'
@@ -56,6 +55,8 @@ const LoginScreen = ({}) => {
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
+        {error && <Message variant='danger'>{error}</Message>}
+        {loading && <Loader />}
         <Button type='submit' variant='primary' className='mt-3'>
           Sign In
         </Button>

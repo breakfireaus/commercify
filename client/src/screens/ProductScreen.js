@@ -28,18 +28,13 @@ const ProductScreen = () => {
 
   return (
     <>
-      <Link className='btn btn-light my-3' to='/'>
-        Go Back
-      </Link>
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'> {error}</Message>
       ) : (
         <Row>
-          <Col md={6}>
-            <Image src={product.image} alt={product.name} fluid />
-          </Col>
+          {' '}
           <Col md={3}>
             <Card>
               <ListGroup variant='flush'>
@@ -58,6 +53,9 @@ const ProductScreen = () => {
                 </ListGroup.Item>
               </ListGroup>
             </Card>
+          </Col>
+          <Col md={6}>
+            <Image src={product.image} alt={product.name} fluid />
           </Col>
           <Col md={3}>
             <Card>
@@ -86,12 +84,17 @@ const ProductScreen = () => {
                       <Col>Qty</Col>
                       <Col>
                         <Form.Select
+                          className='text-white'
                           as='select'
                           value={qty}
                           onChange={(e) => setQty(e.target.value)}
                         >
                           {[...Array(product.countInStock).keys()].map((x) => (
-                            <option key={x + 1} value={x + 1}>
+                            <option
+                              className='text - white'
+                              key={x + 1}
+                              value={x + 1}
+                            >
                               {x + 1}
                             </option>
                           ))}
@@ -116,6 +119,9 @@ const ProductScreen = () => {
           </Col>
         </Row>
       )}
+      <Button className='my-3'>
+        <Link to='/'>Go Back</Link>
+      </Button>
     </>
   )
 }

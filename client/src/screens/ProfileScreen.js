@@ -110,7 +110,9 @@ const ProfileScreen = ({}) => {
         </Button>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
-        {success && <Message variant='success'>{success}</Message>}
+        {success && (
+          <Message variant='success'>Profile successfully changed</Message>
+        )}
         {loading && <Loader />}
       </Col>
     </Row>

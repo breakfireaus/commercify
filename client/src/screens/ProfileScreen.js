@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Button, Row, Col, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getUserDetails } from '../actions/userActions'
+import { getUserDetails, updateTheUserProfile } from '../actions/userActions'
 
 // eslint-disable-next-line no-empty-pattern
 const ProfileScreen = ({}) => {
@@ -14,11 +14,16 @@ const ProfileScreen = ({}) => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
 
-  const location = useLocation()
   const dispatch = useDispatch()
 
+  const userDetails = useSelector((state) => state.userDetails)
+  const { loading, error, user } = userDetails
+
   const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo, loading, error } = userLogin
+  const { userInfo } = userLogin
+
+  const userUpdateProfile = useSelector((state) => state.UpdateTheUserProfile)
+  const { success } = userUpdateProfile
 
   const navigate = useNavigate()
 
@@ -33,14 +38,21 @@ const ProfileScreen = ({}) => {
         setEmail(userInfo.userEmail)
       }
     }
-  }, [dispatch, userInfo])
+  }, [dispatch, navigate, userInfo, user])
 
   const submitHandler = (e) => {
     e.preventDefault()
     if (userPassword !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
-      //todo: dispatch update
+      dispatch(
+        updateTheUserProfile({
+          id: userEmail._id,
+          userName,
+          userEmail,
+          userPassword,
+        })
+      )
     }
   }
 
@@ -48,9 +60,6 @@ const ProfileScreen = ({}) => {
     <Row>
       <Col md={6}>
         <h1>My Profile</h1>
-        {message && <Message variant='danger'>{message}</Message>}
-        {error && <Message variant='danger'>{error}</Message>}
-        {loading && <Loader />}
 
         <Form onSubmit={submitHandler}>
           <Form.Group controlId='userName'>
@@ -99,6 +108,10 @@ const ProfileScreen = ({}) => {
         <Button type='submit' variant='primary' className='mt-3'>
           Update details
         </Button>
+        {message && <Message variant='danger'>{message}</Message>}
+        {error && <Message variant='danger'>{error}</Message>}
+        {success && <Message variant='success'>{success}</Message>}
+        {loading && <Loader />}
       </Col>
     </Row>
   )

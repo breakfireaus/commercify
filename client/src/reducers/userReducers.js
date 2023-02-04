@@ -1,14 +1,17 @@
 import {
+  USER_FINALUPDATEDPROFILE_REQUESTED,
+  USER_FINALUPDATEDPROFILE_SUCCESSFUL,
+  USER_FINALUPDATEDPROFILE_FAILED,
   USER_LOGIN_FAILED,
   USER_LOGIN_REQUESTED,
   USER_LOGIN_SUCCESSFUL,
   USER_LOGOUT_OCCURRENCE,
   USER_REGISTRATION_FAIL,
-  USER_REGISTRATION_REQUEST,
+  USER_REGISTRATION_REQUESTED,
   USER_REGISTRATION_SUCCESSFUL,
-  USER_UPDATEDPROFILE_FAILED,
-  USER_UPDATEDPROFILE_REQUESTED,
-  USER_UPDATEDPROFILE_SUCCESSFUL,
+  USER_DETAILPROFILE_FAILED,
+  USER_DETAILPROFILE_REQUESTED,
+  USER_DETAILPROFILE_SUCCESSFUL,
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -28,7 +31,7 @@ export const userLoginReducer = (state = {}, action) => {
 
 export const userRegisterReducer = (state = {}, action) => {
   switch (action.type) {
-    case USER_REGISTRATION_REQUEST:
+    case USER_REGISTRATION_REQUESTED:
       return { loading: true }
     case USER_REGISTRATION_SUCCESSFUL:
       return { loading: false, userInfo: action.payload }
@@ -39,13 +42,26 @@ export const userRegisterReducer = (state = {}, action) => {
   }
 }
 
-export const userUpdateProfileReducer = (state = { user: {} }, action) => {
+export const userDetailProfileReducer = (state = { user: {} }, action) => {
   switch (action.type) {
-    case USER_UPDATEDPROFILE_REQUESTED:
+    case USER_DETAILPROFILE_REQUESTED:
       return { ...state, loading: true }
-    case USER_UPDATEDPROFILE_SUCCESSFUL:
+    case USER_DETAILPROFILE_SUCCESSFUL:
       return { loading: false, user: action.payload }
-    case USER_UPDATEDPROFILE_FAILED:
+    case USER_DETAILPROFILE_FAILED:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const UpdateTheUserProfileReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_FINALUPDATEDPROFILE_REQUESTED:
+      return { loading: true }
+    case USER_FINALUPDATEDPROFILE_SUCCESSFUL:
+      return { loading: false, success: true, userInfo: action.payload }
+    case USER_FINALUPDATEDPROFILE_FAILED:
       return { loading: false, error: action.payload }
     default:
       return state

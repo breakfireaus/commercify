@@ -18,7 +18,7 @@ const RegisterScreen = ({}) => {
   const location = useLocation()
   const dispatch = useDispatch()
 
-  const userRegister = useSelector((state) => state.userLogin)
+  const userRegister = useSelector((state) => state.userRegister)
   const { loading, error, userInfo } = userRegister
   const navigate = useNavigate()
   const redirect = location.search ? location.search.split('=')[1] : '/'
@@ -42,10 +42,6 @@ const RegisterScreen = ({}) => {
   return (
     <FormContainer>
       <h1>Sign up</h1>
-      {message && <Message variant='danger'>{message}</Message>}
-      {error && <Message variant='danger'>{error}</Message>}
-      {loading && <Loader />}
-
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='userName'>
           <Form.Label>Full Name</Form.Label>
@@ -92,6 +88,10 @@ const RegisterScreen = ({}) => {
           Register
         </Button>
       </Form>
+
+      {message && <Message variant='danger'>{message}</Message>}
+      {error && <Message variant='danger'>{error}</Message>}
+      {loading && <Loader />}
 
       <Row className='py-3'>
         <Col>

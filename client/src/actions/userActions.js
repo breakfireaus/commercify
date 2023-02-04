@@ -140,7 +140,7 @@ export const updateTheUserProfile = (user) => async (dispatch, getState) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorisation: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${userInfo.token}`,
       },
     }
     const { data } = await axios.put(`/api/users/profile`, user, config)

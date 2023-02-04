@@ -47,7 +47,7 @@ const ProfileScreen = ({}) => {
     } else {
       dispatch(
         updateTheUserProfile({
-          id: userEmail._id,
+          id: user._id,
           userName,
           userEmail,
           userPassword,

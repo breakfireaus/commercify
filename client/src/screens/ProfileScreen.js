@@ -4,8 +4,8 @@ import { Button, Row, Col, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getUserDetails, updateTheUserProfile } from '../actions/userActions'
-
+import { getUserDetails, updateUserProfile } from '../actions/userActions'
+import { USER_UPDATEDPROFILE_RESET } from '../constants/userConstants'
 // eslint-disable-next-line no-empty-pattern
 const ProfileScreen = ({}) => {
   const [userName, setName] = useState('')
@@ -22,7 +22,7 @@ const ProfileScreen = ({}) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const userUpdateProfile = useSelector((state) => state.UpdateTheUserProfile)
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
   const { success } = userUpdateProfile
 
   const navigate = useNavigate()
@@ -31,14 +31,15 @@ const ProfileScreen = ({}) => {
     if (!userInfo) {
       navigate('/login')
     } else {
-      if (!userInfo.userName) {
+      if (!userInfo.name) {
         dispatch(getUserDetails('profile'))
+        dispatch({ type: USER_UPDATEDPROFILE_RESET })
       } else {
-        setName(userInfo.userName)
-        setEmail(userInfo.userEmail)
+        setName(userInfo.name || success)
+        setEmail(userInfo.email)
       }
     }
-  }, [dispatch, navigate, userInfo, user])
+  }, [dispatch, navigate, userInfo, user, success])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -46,7 +47,7 @@ const ProfileScreen = ({}) => {
       setMessage('Passwords do not match')
     } else {
       dispatch(
-        updateTheUserProfile({
+        updateUserProfile({
           id: user._id,
           userName,
           userEmail,

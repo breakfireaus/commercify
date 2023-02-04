@@ -1,8 +1,5 @@
 import axios from 'axios'
 import {
-  USER_FINALUPDATEDPROFILE_REQUESTED,
-  USER_FINALUPDATEDPROFILE_SUCCESSFUL,
-  USER_FINALUPDATEDPROFILE_FAILED,
   USER_LOGIN_FAILED,
   USER_LOGIN_REQUESTED,
   USER_LOGIN_SUCCESSFUL,
@@ -13,6 +10,9 @@ import {
   USER_DETAILPROFILE_FAILED,
   USER_DETAILPROFILE_REQUESTED,
   USER_DETAILPROFILE_SUCCESSFUL,
+  USER_UPDATEDPROFILE_REQUESTED,
+  USER_UPDATEDPROFILE_SUCCESSFUL,
+  USER_UPDATEDPROFILE_FAILED,
 } from '../constants/userConstants'
 
 export const login = (userEmail, userPassword) => async (dispatch) => {
@@ -127,10 +127,10 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
   }
 }
 
-export const updateTheUserProfile = (user) => async (dispatch, getState) => {
+export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: USER_FINALUPDATEDPROFILE_REQUESTED,
+      type: USER_UPDATEDPROFILE_REQUESTED,
     })
 
     const {
@@ -146,12 +146,19 @@ export const updateTheUserProfile = (user) => async (dispatch, getState) => {
     const { data } = await axios.put(`/api/users/profile`, user, config)
 
     dispatch({
-      type: USER_FINALUPDATEDPROFILE_SUCCESSFUL,
+      type: USER_UPDATEDPROFILE_SUCCESSFUL,
       payload: data,
     })
+
+    dispatch({
+      type: USER_LOGIN_SUCCESSFUL,
+      payload: data,
+    })
+
+    localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
-      type: USER_FINALUPDATEDPROFILE_FAILED,
+      type: USER_UPDATEDPROFILE_FAILED,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

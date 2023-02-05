@@ -104,18 +104,18 @@ const ProfileScreen = ({}) => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
+          <Col md={6}>
+            <Button className='my-3' type='submit' variant='primary'>
+              Update details
+            </Button>
+            {message && <Message variant='danger'>{message}</Message>}
+            {error && <Message variant='danger'>{error}</Message>}
+            {success && (
+              <Message variant='success'>Profile successfully changed</Message>
+            )}
+            {loading && <Loader />}
+          </Col>
         </Form>
-      </Col>
-      <Col md={6}>
-        <Button type='submit' variant='primary' className='mt-3'>
-          Update details
-        </Button>
-        {message && <Message variant='danger'>{message}</Message>}
-        {error && <Message variant='danger'>{error}</Message>}
-        {success && (
-          <Message variant='success'>Profile successfully changed</Message>
-        )}
-        {loading && <Loader />}
       </Col>
     </Row>
   )

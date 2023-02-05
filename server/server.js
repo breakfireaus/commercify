@@ -22,8 +22,6 @@ app.use(express.json())
 app.use('/api/product', productRoutes)
 app.use('/api/users', userRoutes)
 
-const __dirname = path.resolve()
-
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')))
 

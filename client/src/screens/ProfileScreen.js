@@ -6,6 +6,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { USER_UPDATEDPROFILE_RESET } from '../constants/userConstants'
+
 // eslint-disable-next-line no-empty-pattern
 const ProfileScreen = ({}) => {
   const [userName, setName] = useState('')
@@ -22,8 +23,8 @@ const ProfileScreen = ({}) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
-  const { success } = userUpdateProfile
+  const UserProfile = useSelector((state) => state.UserProfile)
+  const { success } = UserProfile
 
   const navigate = useNavigate()
 
@@ -31,7 +32,7 @@ const ProfileScreen = ({}) => {
     if (!userInfo) {
       navigate('/login')
     } else {
-      if (!userInfo.name || success) {
+      if (!userInfo.name) {
         dispatch(getUserDetails('profile'))
         dispatch({ type: USER_UPDATEDPROFILE_RESET })
       } else {
@@ -39,7 +40,7 @@ const ProfileScreen = ({}) => {
         setEmail(userInfo.email)
       }
     }
-  }, [dispatch, navigate, userInfo, user, success])
+  }, [dispatch, userInfo, user])
 
   const submitHandler = (e) => {
     e.preventDefault()

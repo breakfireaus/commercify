@@ -31,11 +31,11 @@ const ProfileScreen = ({}) => {
     if (!userInfo) {
       navigate('/login')
     } else {
-      if (!userInfo.name) {
+      if (!userInfo.name || success) {
         dispatch(getUserDetails('profile'))
         dispatch({ type: USER_UPDATEDPROFILE_RESET })
       } else {
-        setName(userInfo.name || success)
+        setName(userInfo.name)
         setEmail(userInfo.email)
       }
     }

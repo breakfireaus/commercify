@@ -2,7 +2,7 @@
 
 ## Description
 
-A Website where people can purchase some popular items. The website uses redux
+A Website where people can purchase some popular items. The website uses redux which was challenging and also react which was quite challenging
 
 ## Table of Contents
 

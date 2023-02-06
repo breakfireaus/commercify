@@ -2,7 +2,7 @@
 
 ## Description
 
-A Website where people can purchase some popular items.
+A Website where people can purchase some popular items. The website uses redux
 
 ## Table of Contents
 

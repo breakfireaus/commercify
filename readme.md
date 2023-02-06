@@ -40,6 +40,24 @@ run the website from https://commercify-electronics.herokuapp.com/
 - Tutor for getting me on track
 - instructors
 
+## Technologies used
+
+- react bootstrap
+- Mern Stack ( MongoDB, Express, react, node )
+- Redux
+- JWT
+- bcrypt
+- concurrently
+- morgan
+- mongoose
+- axios
+- redux dev tools
+- react-router
+- react-router-bootstrap
+- react-pro-sidebar
+- react-redux
+- react-app-rewired
+
 ## License
 
 MIT License

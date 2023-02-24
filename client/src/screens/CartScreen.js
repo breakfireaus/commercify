@@ -1,35 +1,43 @@
-import React from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
-import Message from '../components/Message'
-import { addToCart, removeFromCart } from '../actions/cartActions'
+import React from 'react';
+import { Link, useLocation, useParams, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  Row,
+  Col,
+  ListGroup,
+  Image,
+  Form,
+  Button,
+  Card,
+} from 'react-bootstrap';
+import Message from '../components/Message';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = () => {
-  // const navigate = useNavigate() ***FUTURE***
-  const { id } = useParams()
-  const { search } = useLocation()
-  const productId = id
-  const qty = search ? Number(search.split('=')[1]) : 1
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { search } = useLocation();
+  const productId = id;
+  const qty = search ? Number(search.split('=')[1]) : 1;
 
-  const dispatch = useDispatch()
-  const cart = useSelector((state) => state.cart)
-  const { cartItems } = cart
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty))
+      dispatch(addToCart(productId, qty));
     }
-  }, [dispatch, productId, qty])
+  }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id))
-  }
+    dispatch(removeFromCart(id));
+  };
 
-  // const checkoutHandler = () => {
-  //   navigate('/login?redirect=shipping') ***FUTURE***
-  // }
+  const checkoutHandler = () => {
+    navigate('/login?redirect=shipping');
+  };
 
   return (
     <Row>
@@ -95,7 +103,7 @@ const CartScreen = () => {
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                 .toFixed(2)}
             </ListGroup.Item>
-            {/* <ListGroup.Item> ***FUTURE***
+            <ListGroup.Item>
               <Button
                 type='button'
                 className='btn-block'
@@ -104,12 +112,12 @@ const CartScreen = () => {
               >
                 Proceed to Checkout
               </Button>
-            </ListGroup.Item> */}
+            </ListGroup.Item>
           </ListGroup>
         </Card>
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default CartScreen
+export default CartScreen;
